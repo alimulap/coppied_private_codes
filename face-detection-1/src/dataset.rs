@@ -88,7 +88,7 @@ impl WiderFaceDatasetItem {
         let resized_img = img.resize(new_w, new_h, FilterType::CatmullRom);
 
         let mut padded_img =
-            ImageBuffer::from_pixel(target_size, target_size, image::Rgba([0, 0, 0, 1]));
+            ImageBuffer::from_pixel(target_size, target_size, image::Rgba([0, 0, 0, 255]));
 
         let pad_x = (target_size - new_w) / 2;
         let pad_y = (target_size - new_h) / 2;

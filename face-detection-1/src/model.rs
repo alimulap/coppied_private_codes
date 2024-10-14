@@ -32,23 +32,22 @@ pub struct ModelConfig {
     #[config(default = "128")]
     hidden_size: usize,
     #[config(default = "20")]
-    max_faces: usize,
+    max_faces: usize,// Set the max number of faces (boxes) to predict
     #[config(default = "0.5")]
     dropout: f64,
 }
 
 impl ModelConfig {
-    /// Returns the initialized model.
     pub fn init<B: Backend>(&self, device: &B::Device) -> Model<B> {
         Model {
-            num_boxes: self.max_faces, // Set the max number of faces (boxes) to predict
+            num_boxes: self.max_faces, 
             conv1: Conv2dConfig::new([3, 8], [3, 3]).init(device),
             conv2: Conv2dConfig::new([8, 16], [3, 3]).init(device),
             pool: AdaptiveAvgPool2dConfig::new([8, 8]).init(),
             activation: Relu::new(),
             dropout: DropoutConfig::new(self.dropout).init(),
             linear1: LinearConfig::new(16 * 8 * 8, self.hidden_size).init(device),
-            linear2: LinearConfig::new(self.hidden_size, self.max_faces * 4).init(device), // Predict 4 values (bbox) per face
+            linear2: LinearConfig::new(self.hidden_size, self.max_faces * 4).init(device),
         }
     }
 }
