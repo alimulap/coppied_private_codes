@@ -4,5 +4,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-burn = { version = "0.14.0", features = ["wgpu", "train", "tui"] }
+burn = { version = "0.14.0", features = ["wgpu", "train"] }
+dotenvy = "0.15.7"
 image = "0.25.2"
+log = "0.4.22"
+serde = { version = "1.0.212", features = ["derive", "std"] }
